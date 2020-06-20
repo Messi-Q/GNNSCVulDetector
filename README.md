@@ -35,7 +35,7 @@ pip install docopt
 ```
 
 ### Required Dataset
-For each dataset, we randomly pick 20% contracts as the training set while the remainings are utilized for the testing set. 
+For each dataset, we randomly pick 80% contracts as the training set while the remainings are utilized for the testing set. 
 In the comparison, metrics accuracy, recall, precision, and F1 score are all involved. In consideration of the distinct features of different platforms, 
 experiments on reentrancy vulnerability and timestamp dependence vulnerability are conducted on the ESC dataset, 
 while experiments on infinite loop vulnerability detection are conducted on the VSC dataset.
