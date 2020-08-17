@@ -129,6 +129,19 @@ liuzhenguang2008@gmail.com, and qi.liu@cs.ox.ac.uk.
 
 
 ## References
+```
+@inproceedings{ijcai2020-454,
+  title     = {Smart Contract Vulnerability Detection using Graph Neural Network},
+  author    = {Zhuang, Yuan and Liu, Zhenguang and Qian, Peng and Liu, Qi and Wang, Xiang and He, Qinming},
+  booktitle = {Proceedings of the Twenty-Ninth International Joint Conference on
+               Artificial Intelligence, {IJCAI-20}},
+  publisher = {International Joint Conferences on Artificial Intelligence Organization}, 
+  pages     = {3283--3290},
+  year      = {2020},
+}
+
+```
+
 1. VNT Document. [vnt-document](https://github.com/vntchain/vnt-documentation).
 2. Li Y, Tarlow D, Brockschmidt M, et al. Gated graph sequence neural networks. ICLR, 2016. [GGNN](https://arxiv.org/abs/1511.05493)
 
