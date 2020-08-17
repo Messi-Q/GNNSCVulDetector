@@ -726,8 +726,8 @@ def printResult(file, node_feature, edge_feature):
 
             node_feature[i][3] = tmp
 
-    nodeOutPath = "../../data/reentrancy/node/" + file
-    edgeOutPath = "../../data/reentrancy/edge/" + file
+    nodeOutPath = "../../data/reentrancy/graph_data/node/" + file
+    edgeOutPath = "../../data/reentrancy/graph_data/edge/" + file
 
     f_node = open(nodeOutPath, 'a')
     for i in range(len(node_feature)):
@@ -746,23 +746,23 @@ def printResult(file, node_feature, edge_feature):
 
 
 if __name__ == "__main__":
-    test_contract = "../../data/reentrancy/solidity_contract/cross-function-reentrancy.sol"
-    node_feature, edge_feature = generate_graph(test_contract)
-    node_feature = sorted(node_feature, key=lambda x: (x[0]))
-    edge_feature = sorted(edge_feature, key=lambda x: (x[2], x[3]))
-    node_feature, edge_feature = generate_potential_fallback_node(node_feature, edge_feature)
-    print("node_feature", node_feature)
-    print("edge_feature", edge_feature)
+    # test_contract = "../../data/reentrancy/source_code/cross-function-reentrancy.sol"
+    # node_feature, edge_feature = generate_graph(test_contract)
+    # node_feature = sorted(node_feature, key=lambda x: (x[0]))
+    # edge_feature = sorted(edge_feature, key=lambda x: (x[2], x[3]))
+    # node_feature, edge_feature = generate_potential_fallback_node(node_feature, edge_feature)
+    # print("node_feature", node_feature)
+    # print("edge_feature", edge_feature)
 
-    # inputFileDir = "../../data/reentrancy/contracts/"
-    # dirs = os.listdir(inputFileDir)
-    # start_time = time.time()
-    # for file in dirs:
-    #     inputFilePath = inputFileDir + file
-    #     node_feature, edge_feature = generate_graph(inputFilePath)
-    #     node_feature = sorted(node_feature, key=lambda x: (x[0]))
-    #     edge_feature = sorted(edge_feature, key=lambda x: (x[2], x[3]))
-    #     printResult(file, node_feature, edge_feature)
-    #
-    # end_time = time.time()
-    # print(end_time - start_time)
+    inputFileDir = "../../data/reentrancy/source_code/"
+    dirs = os.listdir(inputFileDir)
+    start_time = time.time()
+    for file in dirs:
+        inputFilePath = inputFileDir + file
+        node_feature, edge_feature = generate_graph(inputFilePath)
+        node_feature = sorted(node_feature, key=lambda x: (x[0]))
+        edge_feature = sorted(edge_feature, key=lambda x: (x[2], x[3]))
+        printResult(file, node_feature, edge_feature)
+
+    end_time = time.time()
+    print(end_time - start_time)

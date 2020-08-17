@@ -1,6 +1,6 @@
-InputSmartContract = "./loops/results/Infinite_Loop_AutoExtract_fullnodes.json"
-SmartContractNumber = "./loops/infinite_Loop_contract_number.txt"
-out = "./loops/results/Infinite_Loop_AutoExtract_fullnodes_all.json"
+InputSmartContract = "./reentrancy/results/Reentrancy_AutoExtract_fullnodes.json"
+SmartContractNumber = "./reentrancy/reentrancy_contract_number.txt"
+out = "./reentrancy/results/Reentrancy_AutoExtract_fullnodes_all.json"
 
 ContractNumber = open(SmartContractNumber, "r")
 ContractNumbers = ContractNumber.readlines()

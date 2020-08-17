@@ -236,8 +236,8 @@ def construct_vec(edge_list, node_embedding, var_embedding, edge_embedding, edge
 
 
 if __name__ == "__main__":
-    node = "../../tmp/timestamp/node/2529.sol"
-    edge = "../../tmp/timestamp/edge/2529.sol"
+    node = "../../data/timestamp/graph_data/node/1813.sol"
+    edge = "../../data/timestamp/graph_data/edge/1813.sol"
     nodeNum, node_list, node_attribute_list = extract_node_features(node)
     node_encode, var_encode, node_embedding, var_embedding = embedding_node(node_attribute_list)
     edge_list, extra_edge_list = elimination_edge(edge)
@@ -245,81 +245,81 @@ if __name__ == "__main__":
     node_vec, graph_edge, var_embedding = construct_vec(edge_list, node_embedding, var_embedding, edge_embedding,
                                                         edge_encode)
 
-    v_path = "../../data/timestamp/node/"
-    e_path = "../../data/timestamp/edge/"
-
-    corenodes_output_tmp = open('./results/Timestamp_AutoExtract_corenodes.json', 'w')
-    fullnodes_ouptput_tmp = open('./results/Timestamp_AutoExtract_fullnodes.json', 'w')
-    corenodes_ouptput_gcn = open('./results/Timestamp_AutoExtract_corenodes.txt', 'a')
-    fullnodes_ouptput_gcn = open('./results/Timestamp_AutoExtract_fullnodes.txt', 'a')
-    contract_name = open("./timestamp_contract_name.txt")  # contracts list
-    contract_label = open("./timestamp_contract_label.txt")  # contracts label
-    names = contract_name.readline().strip(" ")
-    labels = contract_label.readline()
-
-    while names:
-        node = os.path.join(v_path, names.strip('\n'))
-        edge = os.path.join(e_path, names.strip('\n'))
-        print(node)
-
-        nodeNum, node_list, node_attribute_list = extract_node_features(node)
-        node_encode, var_encode, node_embedding, var_embedding = embedding_node(node_attribute_list)
-        edge_list, extra_edge_list = elimination_edge(edge)
-        edge_encode, edge_embedding = embedding_edge(edge_list)
-        node_vec, graph_edge, var_embedding = construct_vec(edge_list, node_embedding, var_embedding, edge_embedding,
-                                                            edge_encode)
-
-        fullnodes_ouptput_gcn.write(names)
-        corenodes_ouptput_gcn.write(names)
-
-        for k in range(len(node_embedding)):
-            fullnodes_ouptput_gcn.write(str(node_embedding[k][0]) + ":" + str(node_embedding[k][1]) + '\n')
-        for k in range(len(var_embedding)):
-            fullnodes_ouptput_gcn.write(str(var_embedding[k][0]) + ":" + str(var_embedding[k][1]) + '\n')
-        for k in range(len(node_vec)):
-            corenodes_ouptput_gcn.write(str(node_vec[k][0]) + ":" + str(node_vec[k][1]) + '\n')
-
-        corenodes_feature_list = []
-        for i in range(len(node_vec)):
-            corenodes_feature_list.append(node_vec[i][1])
-
-        fullnodes_feature_list = []
-        for i in range(len(node_embedding)):
-            fullnodes_feature_list.append(node_embedding[i][1])
-        for i in range(len(var_embedding)):
-            fullnodes_feature_list.append(var_embedding[i][1])
-
-        edge_dict = {
-            "graph": graph_edge
-        }
-
-        node_feature_dict = {
-            "node_features": corenodes_feature_list,
-        }
-
-        graph_dict = ({
-            "targets": labels.strip('\n'),
-            "graph": graph_edge,  # graph_edge,
-            "contract_name": names.strip('\n'),
-            "node_features": corenodes_feature_list,  # corenodes_feature_list
-        })
-
-        fullnode_graph_dict = ({
-            "targets": labels.strip('\n'),
-            "graph": graph_edge,  # graph_edge,
-            "contract_name": names.strip('\n'),
-            "node_features": fullnodes_feature_list,  # corenodes_feature_list
-        })
-
-        result = json.dumps(graph_dict)
-        fullnodes_result = json.dumps(fullnode_graph_dict)
-
-        corenodes_output_tmp.write(result + "," + "\n")
-        fullnodes_ouptput_tmp.write(fullnodes_result + "," + "\n")
-        names = contract_name.readline()
-        labels = contract_label.readline()
-
-    fullnodes_ouptput_gcn.close()
-    corenodes_ouptput_gcn.close()
-    corenodes_output_tmp.close()
-    fullnodes_ouptput_tmp.close()
+    # v_path = "../../data/timestamp/graph_data/node/"
+    # e_path = "../../data/timestamp/graph_data/edge/"
+    #
+    # corenodes_output_tmp = open('./results/Timestamp_AutoExtract_corenodes.json', 'w')
+    # fullnodes_ouptput_tmp = open('./results/Timestamp_AutoExtract_fullnodes.json', 'w')
+    # corenodes_ouptput_gcn = open('./results/Timestamp_AutoExtract_corenodes.txt', 'a')
+    # fullnodes_ouptput_gcn = open('./results/Timestamp_AutoExtract_fullnodes.txt', 'a')
+    # contract_name = open("./timestamp_contract_name.txt")  # contracts list
+    # contract_label = open("./timestamp_contract_label.txt")  # contracts label
+    # names = contract_name.readline().strip(" ")
+    # labels = contract_label.readline()
+    #
+    # while names:
+    #     node = os.path.join(v_path, names.strip('\n'))
+    #     edge = os.path.join(e_path, names.strip('\n'))
+    #     print(node)
+    #
+    #     nodeNum, node_list, node_attribute_list = extract_node_features(node)
+    #     node_encode, var_encode, node_embedding, var_embedding = embedding_node(node_attribute_list)
+    #     edge_list, extra_edge_list = elimination_edge(edge)
+    #     edge_encode, edge_embedding = embedding_edge(edge_list)
+    #     node_vec, graph_edge, var_embedding = construct_vec(edge_list, node_embedding, var_embedding, edge_embedding,
+    #                                                         edge_encode)
+    #
+    #     fullnodes_ouptput_gcn.write(names)
+    #     corenodes_ouptput_gcn.write(names)
+    #
+    #     for k in range(len(node_embedding)):
+    #         fullnodes_ouptput_gcn.write(str(node_embedding[k][0]) + ":" + str(node_embedding[k][1]) + '\n')
+    #     for k in range(len(var_embedding)):
+    #         fullnodes_ouptput_gcn.write(str(var_embedding[k][0]) + ":" + str(var_embedding[k][1]) + '\n')
+    #     for k in range(len(node_vec)):
+    #         corenodes_ouptput_gcn.write(str(node_vec[k][0]) + ":" + str(node_vec[k][1]) + '\n')
+    #
+    #     corenodes_feature_list = []
+    #     for i in range(len(node_vec)):
+    #         corenodes_feature_list.append(node_vec[i][1])
+    #
+    #     fullnodes_feature_list = []
+    #     for i in range(len(node_embedding)):
+    #         fullnodes_feature_list.append(node_embedding[i][1])
+    #     for i in range(len(var_embedding)):
+    #         fullnodes_feature_list.append(var_embedding[i][1])
+    #
+    #     edge_dict = {
+    #         "graph": graph_edge
+    #     }
+    #
+    #     node_feature_dict = {
+    #         "node_features": corenodes_feature_list,
+    #     }
+    #
+    #     graph_dict = ({
+    #         "targets": labels.strip('\n'),
+    #         "graph": graph_edge,  # graph_edge,
+    #         "contract_name": names.strip('\n'),
+    #         "node_features": corenodes_feature_list,  # corenodes_feature_list
+    #     })
+    #
+    #     fullnode_graph_dict = ({
+    #         "targets": labels.strip('\n'),
+    #         "graph": graph_edge,  # graph_edge,
+    #         "contract_name": names.strip('\n'),
+    #         "node_features": fullnodes_feature_list,  # corenodes_feature_list
+    #     })
+    #
+    #     result = json.dumps(graph_dict)
+    #     fullnodes_result = json.dumps(fullnode_graph_dict)
+    #
+    #     corenodes_output_tmp.write(result + "," + "\n")
+    #     fullnodes_ouptput_tmp.write(fullnodes_result + "," + "\n")
+    #     names = contract_name.readline()
+    #     labels = contract_label.readline()
+    #
+    # fullnodes_ouptput_gcn.close()
+    # corenodes_ouptput_gcn.close()
+    # corenodes_output_tmp.close()
+    # fullnodes_ouptput_tmp.close()

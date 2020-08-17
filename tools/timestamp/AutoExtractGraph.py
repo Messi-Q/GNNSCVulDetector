@@ -8,7 +8,7 @@ var_list = ['balances', 'userBalance[msg.sender]', '[msg.sender]', '[from]', '[t
 
 # function limit type
 function_limit = ['private', 'onlyOwner', 'internal', 'onlyGovernor', 'onlyCommittee', 'onlyAdmin', 'onlyManager',
-                  'only_owner', 'preventReentry', 'onlyProxyOwner', 'ownerExists', 'noReentrancy']
+                  'only_owner', 'onlyProxyOwner', 'ownerExists']
 
 # Boolean condition expression:
 var_op_bool = ['~', '**', '!=', '<', '>', '<=', '>=', '<<=', '>>=', '==', '<<', '>>', '||', '&&']
@@ -18,9 +18,6 @@ var_op_assign = ['|=', '&=', '+=', '-=', '*=', '/=', '%=', '++', '--', '=']
 
 # function call restrict
 core_call_restrict = ['NoLimit', 'LimitedAC']
-
-# Suspicious reentrancy mark
-var_reentrancy_mark = ['compliance', 'warning', 'violation']
 
 
 # split all functions of contracts
@@ -51,10 +48,7 @@ def generate_graph(filepath):
     node_list = []  # Store all the points
     edge_list = []  # Store edge and edge features
     node_feature_list = []  # Store nodes feature
-    params = []  # Store the parameters of the W functions
-    param = []
     timeStampFlag = 0
-    key_count = 0  # Number of core nodes S and W
 
     # Store other functions without W functions (with block.timestamp)
     for i in range(len(allFunctionList)):
@@ -217,67 +211,40 @@ def outputResult(file, node_feature, edge_feature):
 
             node_feature[i][2] = tmp
 
-    nodeOutPath = "../../data/timestamp/node/" + file
-    edgeOutPath = "../../data/timestamp/edge/" + file
-
-    node_feature1 = []
-    edge_feature1 = []
-    node_flag = 0
-    edge_flag = 0
-
-    for i in range(len(node_feature)):
-        for j in range(len(node_feature[i])):
-            if node_feature[i][j] in main_point:
-                node_flag = 1
-            elif node_flag == 0 and j + 1 == len(node_feature[i]):
-                node_feature1.append(node_feature[i])
-                node_flag = 0
-            elif j + 1 == len(node_feature[i]):
-                node_flag = 0
-
-    for i in range(len(edge_feature)):
-        for j in range(len(edge_feature[i])):
-            if edge_feature[i][j] in main_point:
-                edge_flag = 1
-            elif edge_flag == 0 and j + 1 == len(edge_feature[i]):
-                edge_feature1.append(edge_feature[i])
-                edge_flag = 0
-            elif j + 1 == len(edge_feature[i]):
-                edge_flag = 0
+    nodeOutPath = "../../data/timestamp/graph_data/node/" + file
+    edgeOutPath = "../../data/timestamp/graph_data/edge/" + file
 
     f_node = open(nodeOutPath, 'a')
-    for i in range(len(node_feature1)):
-        result = " ".join(np.array(node_feature1[i]))
+    for i in range(len(node_feature)):
+        result = " ".join(np.array(node_feature[i]))
         f_node.write(result + '\n')
     f_node.close()
 
     f_edge = open(edgeOutPath, 'a')
-    for i in range(len(edge_feature1)):
-        result = " ".join(np.array(edge_feature1[i]))
+    for i in range(len(edge_feature)):
+        result = " ".join(np.array(edge_feature[i]))
         f_edge.write(result + '\n')
     f_edge.close()
 
 
-
-
 if __name__ == "__main__":
-    test_contract = "../../data/timestamp/solidity_contract/5400.sol"
-    node_feature, edge_feature = generate_graph(test_contract)
-    node_feature = sorted(node_feature, key=lambda x: (x[0]))
-    edge_feature = sorted(edge_feature, key=lambda x: (x[2], x[3]))
-    print("node_feature", node_feature)
-    print("edge_feature", edge_feature)
+    # test_contract = "../../data/timestamp/source_code/1813.sol"
+    # node_feature, edge_feature = generate_graph(test_contract)
+    # node_feature = sorted(node_feature, key=lambda x: (x[0]))
+    # edge_feature = sorted(edge_feature, key=lambda x: (x[2], x[3]))
+    # print("node_feature", node_feature)
+    # print("edge_feature", edge_feature)
 
-    # inputFileDir = "../../data/timestamp/solidity_contract/"
-    # dirs = os.listdir(inputFileDir)
-    # start_time = time.time()
-    # for file in dirs:
-    #     print(file)
-    #     inputFilePath = inputFileDir + file
-    #     node_feature, edge_feature = generate_graph(inputFilePath)
-    #     node_feature = sorted(node_feature, key=lambda x: (x[0]))
-    #     edge_feature = sorted(edge_feature, key=lambda x: (x[2], x[3]))
-    #     outputResult(file, node_feature, edge_feature)
-    #
-    # end_time = time.time()
-    # print(end_time - start_time)
+    inputFileDir = "../../data/timestamp/source_code/"
+    dirs = os.listdir(inputFileDir)
+    start_time = time.time()
+    for file in dirs:
+        print(file)
+        inputFilePath = inputFileDir + file
+        node_feature, edge_feature = generate_graph(inputFilePath)
+        node_feature = sorted(node_feature, key=lambda x: (x[0]))
+        edge_feature = sorted(edge_feature, key=lambda x: (x[2], x[3]))
+        outputResult(file, node_feature, edge_feature)
+
+    end_time = time.time()
+    print(end_time - start_time)
