@@ -1,18 +1,15 @@
 # GNNSCVulDetector ![GitHub stars](https://img.shields.io/github/stars/Messi-Q/GNNSCVulDetector.svg?style=plastic) ![GitHub forks](https://img.shields.io/github/forks/Messi-Q/GNNSCVulDetector.svg?color=blue&style=plastic) 
 
-This repo is a python implementation of smart contract vulnerability detection based on graph neural networks (GNNs). 
-In this research work, we focus on detecting three kinds of smart contract vulnerabilities (i.e., reentrancy, timestamp dependence, and infinite loop), 
-which are not only the most significant threat to contract security but also challenging to precisely identify. 
+This repo is a python implementation of smart contract vulnerability detection using graph neural networks. 
+In this research work, we focus on detecting three kinds of smart contract vulnerabilities (i.e., reentrancy, timestamp dependence, and infinite loop).
 All of the infinite loop types we concerned are implemented by Class C/C++ of [VNT](https://github.com/vntchain/go-vnt), 
 while the smart contracts of reentrancy and timestamp dependence are wirrten by Solidity, i.e., [Ethereum](https://etherscan.io/) smart contract. 
-Ethereum is a decentralized blockchain platform that can build a broad scope of applications, while Ether is one kind of cryptocurrency used on this platform.
-Vntchain, an open-source distributed value network that runs smart contracts represented by Class C/C++. 
-Vntchain is a novel and evolutionary blockchain platform, which borrows the architecture mode from Ethereum and 
-incorporates Delegate Proof of Stake (DPOS) and Byzantine Fault Tolerance (BFT) technologies for higher 
-performance and security. 
 
-The ESC dataset consists of 40,932 smart contracts from Ethereum. Among the functions, around 5,013 functions possess at least one invocation to call.value, making them potentially affected by the reentrancy vulnerability. Around 4,833 functions contain the block.timestamp statement, making them susceptible to the timestamp dependence vulnerability.
-The VSC dataset contains all the available 4,170 smart contracts collected from the VNT Chain network, which overall contain 13,761 functions. VNT Chain is an experimental public blockchain platform proposed by companies and universities from Singapore, China, and Australia.
+The ESC dataset consists of 40,932 smart contracts from Ethereum. 
+Among the functions, around 5,013 functions possess at least one invocation to call.value, making them potentially affected by the reentrancy vulnerability. 
+Around 4,833 functions contain the block.timestamp statement, making them susceptible to the timestamp dependence vulnerability.
+The VSC dataset contains all the available 4,170 smart contracts collected from the VNT Chain network, which overall contain 13,761 functions. 
+VNT Chain is an experimental public blockchain platform proposed by companies and universities from Singapore, China, and Australia.
 
 ## Requirements
 
