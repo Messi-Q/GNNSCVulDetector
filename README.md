@@ -51,13 +51,13 @@ All of the smart contract source code, graph data, and training data in these fo
 ${GGNNSmartVulDetector}
 ├── data
 │   ├── loops
-│   │   └── contract
+│   │   └── source_code
 │   │   └── graph_data
 │   ├── timestamp
-│   │   └── contract
+│   │   └── source_code
 │   │   └── graph_data
 │   └── reentrancy
-│       └── contract
+│       └── source_code
 │       └── graph_data
 ├── features
     ├── loops
