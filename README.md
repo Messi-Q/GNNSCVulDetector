@@ -38,7 +38,7 @@ experiments on reentrancy vulnerability and timestamp dependence vulnerability a
 while experiments on infinite loop vulnerability detection are conducted on the VSC dataset.
 
 #### source code
-Original smart contract source code:
+Original smart contract source code stored in google drive:
 
 Ethereum smart contracts:  [Etherscan_contract](https://drive.google.com/open?id=1h9aFFSsL7mK4NmVJd4So7IJlFj9u0HRv)
 
@@ -77,7 +77,7 @@ ${GGNNSmartVulDetector}
 
 ```
 
-* `data/reentrancy/contract`:  This is the data of original smart contracts.
+* `data/reentrancy/source_code`:  This is the data of original smart contracts.
 * `data/reentrancy/graph_data`: This is the graph data, consisting edges and nodes, which are extracted by our AutoExtractor.
 * `graph_data/edge`: It includes all edges and edge of each smart contract.
 * `graph_data/node`: It includes all nodes and node of each smart contract.
