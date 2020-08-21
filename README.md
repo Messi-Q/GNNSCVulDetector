@@ -44,6 +44,8 @@ Ethereum smart contracts:  [Etherscan_contract](https://drive.google.com/open?id
 
 Vntchain smart contacts: [Vntchain_contract](https://drive.google.com/open?id=1FTb__ERCOGNGM9dTeHLwAxBLw7X5Td4v)
 
+Here, we provide a [tool](https://github.com/Messi-Q/Crawler) for crawling source code from Etherscan, which is developed in Aug 2018. 
+If out of date, you can refer and make the corresponding improvements.
 
 #### Dataset structure in this project
 All of the smart contract source code, graph data, and training data in these folders in the following structure respectively.
