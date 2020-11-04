@@ -38,12 +38,14 @@ experiments on reentrancy vulnerability and timestamp dependence vulnerability a
 while experiments on infinite loop vulnerability detection are conducted on the VSC dataset.
 
 #### source code
-Original smart contract source code:
+Original smart contract source code stored in google drive:
 
 Ethereum smart contracts:  [Etherscan_contract](https://drive.google.com/open?id=1h9aFFSsL7mK4NmVJd4So7IJlFj9u0HRv)
 
 Vntchain smart contacts: [Vntchain_contract](https://drive.google.com/open?id=1FTb__ERCOGNGM9dTeHLwAxBLw7X5Td4v)
 
+Here, we provide a [tool](https://github.com/Messi-Q/Crawler) for crawling source code from Etherscan, which is developed in Aug 2018. 
+If out of date, you can refer and make the corresponding improvements.
 
 #### Dataset structure in this project
 All of the smart contract source code, graph data, and training data in these folders in the following structure respectively.
@@ -51,13 +53,13 @@ All of the smart contract source code, graph data, and training data in these fo
 ${GNNSCVulDetector}
 ├── data
 │   ├── loops
-│   │   └── contract
+│   │   └── source_code
 │   │   └── graph_data
 │   ├── timestamp
-│   │   └── contract
+│   │   └── source_code
 │   │   └── graph_data
 │   └── reentrancy
-│       └── contract
+│       └── source_code
 │       └── graph_data
 ├── features
     ├── loops
@@ -77,7 +79,7 @@ ${GNNSCVulDetector}
 
 ```
 
-* `data/reentrancy/contract`:  This is the data of original smart contracts.
+* `data/reentrancy/source_code`:  This is the data of original smart contracts.
 * `data/reentrancy/graph_data`: This is the graph data, consisting edges and nodes, which are extracted by our AutoExtractor.
 * `graph_data/edge`: It includes all edges and edge of each smart contract.
 * `graph_data/node`: It includes all nodes and node of each smart contract.
