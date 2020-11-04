@@ -15,7 +15,7 @@ VNT Chain is an experimental public blockchain platform proposed by companies an
 
 #### Required Packages
 * **python**3
-* **TensorFlow**1.14.0
+* **TensorFlow**1.14.0 (tf2.0 is not supported)
 * **keras**2.2.4 with TensorFlow backend
 * **sklearn** for model evaluation
 * **docopt** as a command-line interface parser 
@@ -48,7 +48,7 @@ Vntchain smart contacts: [Vntchain_contract](https://drive.google.com/open?id=1F
 #### Dataset structure in this project
 All of the smart contract source code, graph data, and training data in these folders in the following structure respectively.
 ```shell
-${GGNNSmartVulDetector}
+${GNNSCVulDetector}
 ├── data
 │   ├── loops
 │   │   └── contract
