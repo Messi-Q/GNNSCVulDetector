@@ -126,7 +126,7 @@ python GNNSCModel.py --random_seed 9930 --thresholds 0.45
 ### Consultation
 We would like to point that the data processing code is available here. 
 For the questions of codebase and dataset, please email to messi.qp711@gmail.com. And, the code is adapted from [GGNN](https://github.com/Microsoft/gated-graph-neural-network-samples).
-Technical questions can be addressed to zhuangyuan2020@outlook.com, liuzhenguang2008@gmail.com, and qi.liu@cs.ox.ac.uk.
+[comment]: <Technical questions can be addressed to zhuangyuan2020@outlook.com, liuzhenguang2008@gmail.com, and qi.liu@cs.ox.ac.uk.>
 
 
 ## References
