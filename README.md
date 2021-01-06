@@ -31,11 +31,8 @@ pip install scikit-learn
 pip install docopt
 ```
 
-### Required Dataset
-For each dataset, we randomly pick 80% contracts as the training set while the remainings are utilized for the testing set. 
-In the comparison, metrics accuracy, recall, precision, and F1 score are all involved. In consideration of the distinct features of different platforms, 
-experiments on reentrancy vulnerability and timestamp dependence vulnerability are conducted on the ESC dataset, 
-while experiments on infinite loop vulnerability detection are conducted on the VSC dataset.
+### Datasets
+We collected the datasets of reentrancy vulnerability and timestamp dependence vulnerability from Ethereum, and the dataset of infinite loop vulnerability from VNT Chain. For each dataset, we randomly pick 80% contracts as the training set while the remainings are utilized for the testing set. In the comparison, metrics accuracy, recall, precision, and F1 score are all involved. Experiments on reentrancy vulnerability and timestamp dependence vulnerability are conducted on the Ethereum dataset (ESC), while experiments on infinite loop vulnerability are conducted on the VNT Chain dataset (VSC).
 
 #### source code
 Original smart contract source code stored in google drive:
