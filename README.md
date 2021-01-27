@@ -3,13 +3,24 @@
 This repo is a python implementation of smart contract vulnerability detection using graph neural networks. 
 In this research work, we focus on detecting three kinds of smart contract vulnerabilities (i.e., reentrancy, timestamp dependence, and infinite loop).
 All of the infinite loop types we concerned are implemented by Class C/C++ of [VNT](https://github.com/vntchain/go-vnt), 
-while the smart contracts of reentrancy and timestamp dependence are wirrten by Solidity, i.e., [Ethereum](https://etherscan.io/) smart contract. 
+while the smart contracts of reentrancy and timestamp dependence are wirrten by Solidity, i.e., [Ethereum](https://etherscan.io/) smart contract.
 
-The ESC dataset consists of 40,932 smart contracts from Ethereum. 
-Among the functions, around 5,013 functions possess at least one invocation to call.value, making them potentially affected by the reentrancy vulnerability. 
-Around 4,833 functions contain the block.timestamp statement, making them susceptible to the timestamp dependence vulnerability.
-The VSC dataset contains all the available 4,170 smart contracts collected from the VNT Chain network, which overall contain 13,761 functions. 
-VNT Chain is an experimental public blockchain platform proposed by companies and universities from Singapore, China, and Australia.
+
+## Citation
+Please use this citation if you want to cite our paper and this code in your paper:
+```
+@inproceedings{ijcai2020-454,
+  title     = {Smart Contract Vulnerability Detection using Graph Neural Network},
+  author    = {Zhuang, Yuan and Liu, Zhenguang and Qian, Peng and Liu, Qi and Wang, Xiang and He, Qinming},
+  booktitle = {Proceedings of the Twenty-Ninth International Joint Conference on
+               Artificial Intelligence, {IJCAI-20}},
+  publisher = {International Joint Conferences on Artificial Intelligence Organization}, 
+  pages     = {3283--3290},
+  year      = {2020},
+}
+
+``` 
+
 
 ## Requirements
 
@@ -34,8 +45,7 @@ pip install docopt
 ### Required Dataset
 For each dataset, we randomly pick 80% contracts as the training set while the remainings are utilized for the testing set. 
 In the comparison, metrics accuracy, recall, precision, and F1 score are all involved. In consideration of the distinct features of different platforms, 
-experiments on reentrancy vulnerability and timestamp dependence vulnerability are conducted on the ESC dataset, 
-while experiments on infinite loop vulnerability detection are conducted on the VSC dataset.
+experiments on reentrancy vulnerability and timestamp dependence vulnerability are conducted on the ESC dataset, while experiments on infinite loop vulnerability detection are conducted on the VSC dataset.
 
 #### source code
 Original smart contract source code stored in google drive:
@@ -126,24 +136,11 @@ python GNNSCModel.py --random_seed 9930 --thresholds 0.45
 ### Consultation
 We would like to point that the data processing code is available here. 
 For the complete codebase, please email to messi.qp711@gmail.com. And, the code is adapted from [GGNN](https://github.com/Microsoft/gated-graph-neural-network-samples).
-Technical questions can be addressed to zhuangyuan2020@outlook.com, 
-liuzhenguang2008@gmail.com, and qi.liu@cs.ox.ac.uk.
+Technical questions can be addressed to messi.qp711@gmail.com, zhuangyuan2020@outlook.com, liuzhenguang2008@gmail.com.
 
 
-## References
-```
-@inproceedings{ijcai2020-454,
-  title     = {Smart Contract Vulnerability Detection using Graph Neural Network},
-  author    = {Zhuang, Yuan and Liu, Zhenguang and Qian, Peng and Liu, Qi and Wang, Xiang and He, Qinming},
-  booktitle = {Proceedings of the Twenty-Ninth International Joint Conference on
-               Artificial Intelligence, {IJCAI-20}},
-  publisher = {International Joint Conferences on Artificial Intelligence Organization}, 
-  pages     = {3283--3290},
-  year      = {2020},
-}
 
-```
-
+### Reference
 1. VNT Document. [vnt-document](https://github.com/vntchain/vnt-documentation).
 2. Li Y, Tarlow D, Brockschmidt M, et al. Gated graph sequence neural networks. ICLR, 2016. [GGNN](https://arxiv.org/abs/1511.05493)
 

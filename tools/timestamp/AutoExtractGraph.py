@@ -228,23 +228,23 @@ def outputResult(file, node_feature, edge_feature):
 
 
 if __name__ == "__main__":
-    # test_contract = "../../data/timestamp/source_code/1813.sol"
-    # node_feature, edge_feature = generate_graph(test_contract)
-    # node_feature = sorted(node_feature, key=lambda x: (x[0]))
-    # edge_feature = sorted(edge_feature, key=lambda x: (x[2], x[3]))
-    # print("node_feature", node_feature)
-    # print("edge_feature", edge_feature)
+    test_contract = "../../data/timestamp/source_code/1813.sol"
+    node_feature, edge_feature = generate_graph(test_contract)
+    node_feature = sorted(node_feature, key=lambda x: (x[0]))
+    edge_feature = sorted(edge_feature, key=lambda x: (x[2], x[3]))
+    print("node_feature", node_feature)
+    print("edge_feature", edge_feature)
 
-    inputFileDir = "../../data/timestamp/source_code/"
-    dirs = os.listdir(inputFileDir)
-    start_time = time.time()
-    for file in dirs:
-        print(file)
-        inputFilePath = inputFileDir + file
-        node_feature, edge_feature = generate_graph(inputFilePath)
-        node_feature = sorted(node_feature, key=lambda x: (x[0]))
-        edge_feature = sorted(edge_feature, key=lambda x: (x[2], x[3]))
-        outputResult(file, node_feature, edge_feature)
-
-    end_time = time.time()
-    print(end_time - start_time)
+    # inputFileDir = "../../data/timestamp/source_code/"
+    # dirs = os.listdir(inputFileDir)
+    # start_time = time.time()
+    # for file in dirs:
+    #     print(file)
+    #     inputFilePath = inputFileDir + file
+    #     node_feature, edge_feature = generate_graph(inputFilePath)
+    #     node_feature = sorted(node_feature, key=lambda x: (x[0]))
+    #     edge_feature = sorted(edge_feature, key=lambda x: (x[2], x[3]))
+    #     outputResult(file, node_feature, edge_feature)
+    #
+    # end_time = time.time()
+    # print(end_time - start_time)

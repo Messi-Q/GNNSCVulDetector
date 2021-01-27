@@ -396,26 +396,26 @@ def outputResult(file, node_feature_list, edge_list):
 
 
 if __name__ == "__main__":
-    # test_contract = "../../data/loops/source_code/fallback.c"
-    # node_feature_list, edge_list, node_list = generate_graph(test_contract)
-    # node_feature_list = sorted(node_feature_list, key=lambda x: (x[0]))
-    # edge_list = sorted(edge_list, key=lambda x: (x[2], x[3]))
-    # print("node_feature", node_feature_list)
-    # print("edge_feature", edge_list)
-    # print("node_list", node_list)
+    test_contract = "../../data/loops/source_code/fallback.c"
+    node_feature_list, edge_list, node_list = generate_graph(test_contract)
+    node_feature_list = sorted(node_feature_list, key=lambda x: (x[0]))
+    edge_list = sorted(edge_list, key=lambda x: (x[2], x[3]))
+    print("node_feature", node_feature_list)
+    print("edge_feature", edge_list)
+    print("node_list", node_list)
 
-    inputFileDir = "../../data/loops/source_code/"
-    dirs = os.listdir(inputFileDir)
-    start_time = time.time()
-    for file in dirs:
-        inputFilePath = inputFileDir + file
-        print(inputFilePath)
-        node_feature_list, edge_list, node_list = generate_graph(inputFilePath)
-        node_feature_list = sorted(node_feature_list, key=lambda x: (x[0]))
-        edge_list = sorted(edge_list, key=lambda x: (x[2], x[3]))
-        print("node_feature", node_feature_list)
-        print("edge_feature", edge_list)
-        outputResult(file, node_feature_list, edge_list)
-
-    end_time = time.time()
-    print(end_time - start_time)
+    # inputFileDir = "../../data/loops/source_code/"
+    # dirs = os.listdir(inputFileDir)
+    # start_time = time.time()
+    # for file in dirs:
+    #     inputFilePath = inputFileDir + file
+    #     print(inputFilePath)
+    #     node_feature_list, edge_list, node_list = generate_graph(inputFilePath)
+    #     node_feature_list = sorted(node_feature_list, key=lambda x: (x[0]))
+    #     edge_list = sorted(edge_list, key=lambda x: (x[2], x[3]))
+    #     print("node_feature", node_feature_list)
+    #     print("edge_feature", edge_list)
+    #     outputResult(file, node_feature_list, edge_list)
+    #
+    # end_time = time.time()
+    # print(end_time - start_time)
