@@ -42,12 +42,12 @@ pip install scikit-learn
 pip install docopt
 ```
 
-### Required Dataset
+### Dataset
 For each dataset, we randomly pick 80% contracts as the training set while the remainings are utilized for the testing set. 
 In the comparison, metrics accuracy, recall, precision, and F1 score are all involved. In consideration of the distinct features of different platforms, 
 experiments on reentrancy vulnerability and timestamp dependence vulnerability are conducted on the ESC dataset, while experiments on infinite loop vulnerability detection are conducted on the VSC dataset.
 
-#### source code
+#### smart contract source code
 Original smart contract source code stored in google drive:
 
 Ethereum smart contracts:  [Etherscan_contract](https://drive.google.com/open?id=1h9aFFSsL7mK4NmVJd4So7IJlFj9u0HRv)
