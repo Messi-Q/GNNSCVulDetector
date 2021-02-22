@@ -16,23 +16,19 @@ Options:
 """
 from __future__ import print_function
 from typing import List, Tuple, Dict, Sequence, Any
-
 from docopt import docopt
 from collections import defaultdict
+from BasicModel import DetectModel
+from utils import glorot_init
+
 import numpy as np
 import tensorflow as tf
 
-print(tf.__version__)
-
-# tf.enable_eager_execution()
-import sys, traceback
-import pdb
 import os
-
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
-from BasicModel import DetectModel
-from utils import glorot_init
+print(tf.__version__)
+# tf.enable_eager_execution()
 
 
 def bfs_visit(outgoing_edges: Dict[int, Sequence[int]], node_depths: Dict[int, int], v: int, depth: int):
@@ -53,14 +49,14 @@ class GNNSCModel(DetectModel):
         params = dict(super().default_params())
         params.update({
             'num_nodes': 100000,
-            'use_edge_bias': False,  # False->True
+            'use_edge_bias': False,  # False or True
 
-            'propagation_rounds': 1,  # Has to be an even number(4), 4->1
-            'propagation_substeps': 15,  # 15->20
+            'propagation_rounds': 1,
+            'propagation_substeps': 15,  # [15, 20]
 
             'graph_rnn_cell': 'rnn',  # gru or rnn
-            'graph_rnn_activation': 'tanh',  # tanh, relu
-            'graph_state_dropout_keep_prob': 0.9,  # 1.->0.5
+            'graph_rnn_activation': 'tanh',  # tanh or relu
+            'graph_state_dropout_keep_prob': 0.9,  # [0.5, 1.0]
 
             'task_sample_ratios': {},
         })
@@ -189,7 +185,7 @@ class GNNSCModel(DetectModel):
                                                     clear_after_read=False,
                                                     name='new_node_states')
 
-                # ---- Actual propagation schedule implementation:
+                # Actual propagation schedule implementation:
                 # Initialize the initial nodes with their state from last round:
                 new_node_states_ta = new_node_states_ta.scatter(self.placeholders['initial_nodes'][prop_round],
                                                                 tf.gather(cur_node_states,
@@ -218,9 +214,9 @@ class GNNSCModel(DetectModel):
                     old_receiving_node_states = tf.gather(cur_node_states, substep_receiving_nodes)
                     aggregated_received_messages.set_shape([None, self.params['hidden_size']])
                     old_receiving_node_states.set_shape([None, self.params['hidden_size']])
-                    # substep_new_node_states = \
-                    #     self.weights['rnn_cells'](aggregated_received_messages, old_receiving_node_states)[1]
-                    substep_new_node_states = tf.add(aggregated_received_messages, old_receiving_node_states)
+                    substep_new_node_states = \
+                        self.weights['rnn_cells'](aggregated_received_messages, old_receiving_node_states)[1]
+                    # substep_new_node_states = tf.add(aggregated_received_messages, old_receiving_node_states)
                     # Write updated states back:
                     new_node_states_ta = new_node_states_ta.scatter(substep_receiving_nodes, substep_new_node_states)
                     return substep_id + 1, new_node_states_ta
@@ -251,7 +247,7 @@ class GNNSCModel(DetectModel):
         return tf.squeeze(
             graph_representations), graph_representations, self.placeholders['initial_node_representation']
 
-    # ----- Data preprocessing and chunking into minibatches:
+    # Data preprocessing and chunking into minibatches:
     def process_raw_graphs(self, raw_data: Sequence[Any], is_training_data: bool) -> Any:
         processed_graphs = []
         count = 0
@@ -271,7 +267,7 @@ class GNNSCModel(DetectModel):
                                                        self.params['task_ids']]})
 
         if is_training_data:
-            # np.random.shuffle(processed_graphs)
+            # np.random.shuffle(processed_graphs)  # shuffle the data
             for task_id in self.params['task_ids']:
                 task_sample_ratio = self.params['task_sample_ratios'].get(str(task_id))
                 if task_sample_ratio is not None:
@@ -354,7 +350,7 @@ class GNNSCModel(DetectModel):
                     fwd_pass_edges[v_depth - 1].append((w, edge_bwd_type, v))
                     bwd_pass_edges[-w_depth - 1].append((v, typ, w))
                 else:
-                    # We ignore self-loops:
+                    # ignore self loops:
                     assert v == w
 
             tensorised_prop_schedules.append(self.__tensorise_edge_sequence(fwd_pass_edges))
@@ -366,6 +362,7 @@ class GNNSCModel(DetectModel):
         """Create minibatches by flattening graphs into a single one with multiple disconnected components."""
         # if is_training:
         #     np.random.shuffle(data)
+
         dropout_keep_prob = self.params['graph_state_dropout_keep_prob'] if is_training else 1.
 
         # Pack until we cannot fit more graphs in the batch

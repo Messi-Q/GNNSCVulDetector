@@ -1,6 +1,7 @@
 #!/usr/bin/env/python
 from __future__ import print_function
 from typing import List, Any, Sequence
+from utils import MLP, ThreadedIterator
 
 import tensorflow as tf
 import time
@@ -10,8 +11,6 @@ import numpy as np
 import pickle
 import random
 
-from utils import MLP, ThreadedIterator
-
 
 class DetectModel(object):
     @classmethod
@@ -20,13 +19,13 @@ class DetectModel(object):
             'num_epochs': 200,
             'patience': 150,
             'learning_rate': 0.002,
-            'clamp_gradient_norm': 0.9,  # 1.0->0.8
-            'out_layer_dropout_keep_prob': 0.9,  # 1.0->0.8
+            'clamp_gradient_norm': 0.9,  # [0.8, 1.0]
+            'out_layer_dropout_keep_prob': 0.9,  # [0.8, 1.0]
 
             'hidden_size': 250,  # 256/512/1024/2048
             'use_graph': True,
 
-            'tie_fwd_bkwd': False,  # True->False
+            'tie_fwd_bkwd': False,  # True or False
             'task_ids': [0],
 
             'train_file': 'train_data/reentrancy/train.json',
@@ -213,7 +212,7 @@ class DetectModel(object):
                 P = tf.cast(tf.divide(TP, tf.add(TP, FP)), tf.float32)  # Precision
                 FPR = tf.cast(tf.divide(FP, tf.add(TN, FP)), tf.float32)  # FPR: false positive rate
                 D_TP = tf.add(TP, TP)
-                F1 = tf.cast(tf.divide(D_TP, tf.add_n([D_TP, FP, FN])), tf.float32)  # F1
+                F1 = tf.cast(tf.divide(D_TP, tf.add_n([D_TP, FP, FN])), tf.float32)  # F1 score
                 self.ops['sigm_Recall'] = R
                 self.ops['sigm_Precision'] = P
                 self.ops['sigm_F1'] = F1
@@ -293,7 +292,8 @@ class DetectModel(object):
                                              segment_ids=self.placeholders['graph_nodes_list'],
                                              num_segments=self.placeholders['num_graphs'])
                 var_finial_node = self.sess.run([ss], feed_dict=batch_data)
-                np.savetxt("./features/loops/loops_no_model_final_train.txt", var_finial_node[0], fmt="%.6f")
+                np.savetxt("./features/reentrancy/reentrancy_train_feature_with_rnn_cell.txt", var_finial_node[0],
+                           fmt="%.6f")
                 # print("graph representation: {}".format(var_fn))
                 print("type: {}  length: {}".format(type(var_fn), len(var_fn)))
             elif epoch == 150 and is_training is not True:
@@ -302,7 +302,8 @@ class DetectModel(object):
                                              segment_ids=self.placeholders['graph_nodes_list'],
                                              num_segments=self.placeholders['num_graphs'])
                 var_finial_node = self.sess.run([ss], feed_dict=batch_data)
-                np.savetxt("./features/loops/loops_no_model_final_valid.txt", var_finial_node[0], delimiter=", ",
+                np.savetxt("./features/reentrancy/reentrancy_valid_feature_with_rnn_cell.txt", var_finial_node[0],
+                           delimiter=", ",
                            fmt="%.6f")
                 # print("graph representation: {}".format(var_fn))
                 print("type: {}  length: {}".format(type(var_fn), len(var_fn)))
