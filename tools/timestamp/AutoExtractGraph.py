@@ -27,15 +27,26 @@ def split_function(filepath):
     lines = f.readlines()
     f.close()
     flag = -1
+    flag1 = 0
 
     for line in lines:
         text = line.strip()
         if len(text) > 0 and text != "\n":
-            if text.split()[0] == "function" or text.split()[0] == "function()":
-                function_list.append([text])
-                flag += 1
-            elif len(function_list) > 0 and ("function" in function_list[flag][0]):
-                function_list[flag].append(text)
+            if text.split()[0] == "function" and len(function_list) > 0:
+                flag1 = 0
+        if flag1 == 0:
+            if len(text) > 0 and text != "\n":
+                if text.split()[0] == "function" or text.split()[0] == "function()":
+                    function_list.append([text])
+                    flag += 1
+                elif len(function_list) > 0 and ("function" in function_list[flag][0]):
+                    if text.split()[0] != "modifier" and text.split()[0] != "event":
+                        function_list[flag].append(text)
+                    else:
+                        flag1 += 1
+                        continue
+        else:
+            continue
 
     return function_list
 
