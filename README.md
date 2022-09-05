@@ -124,7 +124,7 @@ Examples:
 python GNNSCModel.py --random_seed 9930 --thresholds 0.45
 ```
 
-### Consultation
+### Note
 We would like to point that the data processing code is available here. 
 If any question, please email to messi.qp711@gmail.com. And, the code is adapted from [GGNN](https://github.com/Microsoft/gated-graph-neural-network-samples).
 
