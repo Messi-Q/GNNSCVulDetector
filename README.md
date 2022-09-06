@@ -59,9 +59,6 @@ ${GNNSCVulDetector}
 │   └── reentrancy
 │       └── source_code
 │       └── graph_data
-├── features
-    ├── timestamp
-    └── reentrancy
 ├── train_data
     ├── timestamp
     │   └── train.json
