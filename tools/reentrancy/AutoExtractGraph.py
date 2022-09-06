@@ -61,11 +61,11 @@ def split_function(filepath):
 
 
 # generate a potential fallback node
-def generate_potential_fallback_node(node_feature, edge_feature):
-    node_feature.append(["F", "F", "NoLimit", ["S"], 0, "MSG"])
-    edge_feature.append(["S", "F", "S", 0, "FW"])
-    edge_feature.append(["F", "W0", "F", 1, "FW"])
-    return node_feature, edge_feature
+#def generate_potential_fallback_node(node_feature, edge_feature):
+#    node_feature.append(["F", "F", "NoLimit", ["S"], 0, "MSG"])
+#    edge_feature.append(["S", "F", "S", 0, "FW"])
+#    edge_feature.append(["F", "W0", "F", 1, "FW"])
+#    return node_feature, edge_feature
 
 
 # Position the call.value to generate the graph
@@ -77,7 +77,7 @@ def generate_graph(filepath):
     withdrawNameList = []  # Store the W function name that calls call.value
     otherFunctionList = []  # Store functions other than W functions
     node_list = []  # Store all the points
-    edge_list = []  # Store edge and edge features
+    edge_list = []  # Store edge and edge nips_features
     node_feature_list = []  # Store nodes feature
     params = []  # Store the parameters of the W functions
     param = []
@@ -725,7 +725,7 @@ def generate_graph(filepath):
 
 
 def printResult(file, node_feature, edge_feature):
-    main_point = ['S', 'W0', 'W1', 'W2', 'W3', 'W4', 'C0', 'C1', 'C2', 'C3', 'C4', 'F']
+    main_point = ['S', 'W0', 'W1', 'W2', 'W3', 'W4', 'C0', 'C1', 'C2', 'C3', 'C4']
 
     for i in range(len(node_feature)):
         if node_feature[i][0] in main_point:
@@ -761,7 +761,7 @@ if __name__ == "__main__":
     node_feature, edge_feature = generate_graph(test_contract)
     node_feature = sorted(node_feature, key=lambda x: (x[0]))
     edge_feature = sorted(edge_feature, key=lambda x: (x[2], x[3]))
-    node_feature, edge_feature = generate_potential_fallback_node(node_feature, edge_feature)
+   # node_feature, edge_feature = generate_potential_fallback_node(node_feature, edge_feature)
     print("node_feature", node_feature)
     print("edge_feature", edge_feature)
 

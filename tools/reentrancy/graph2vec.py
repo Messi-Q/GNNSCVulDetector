@@ -4,7 +4,7 @@ import numpy as np
 from reentrancy.vec2onehot import vec2onehot
 
 """
-S, W, C features: Node features + Edge features + Var features;
+S, W, C nips_features: Node nips_features + Edge nips_features + Var nips_features;
 Node self property + Incoming Var + Outgoing Var + Incoming Edge + Outgoing Edge
 """
 
@@ -32,7 +32,7 @@ node_convert = {"S": 0, "W0": 1, "C0": 2, "W1": 3, "C1": 4, "W2": 5, "C2": 6, "W
 v2o = vec2onehot()  # create the one-bot dicts
 
 
-# extract the features of each node from input file #
+# extract the nips_features of each node from input file #
 def extract_node_features(nodeFile):
     nodeNum = 0
     node_list = []
@@ -60,7 +60,7 @@ def extract_node_features(nodeFile):
 
 # elimination procedure for sub_graph Start here #
 def elimination_node(node_attribute_list):
-    main_point = ['S', 'W0', 'W1', 'W2', 'W3', 'W4', 'C0', 'C1', 'C2', 'C3', 'C4', 'F']
+    main_point = ['S', 'W0', 'W1', 'W2', 'W3', 'W4', 'C0', 'C1', 'C2', 'C3', 'C4']
     extra_var_list = []  # extract var with low priority
     for i in range(0, len(node_attribute_list)):
         if node_attribute_list[i][1] not in main_point:
@@ -87,7 +87,7 @@ def embedding_node(node_attribute_list):
     var_encode = []
     node_embedding = []
     var_embedding = []
-    main_point = ['S', 'W0', 'W1', 'W2', 'W3', 'W4', 'C0', 'C1', 'C2', 'C3', 'C4', 'F']
+    main_point = ['S', 'W0', 'W1', 'W2', 'W3', 'W4', 'C0', 'C1', 'C2', 'C3', 'C4']
 
     for j in range(0, len(node_attribute_list)):
         v = node_attribute_list[j][0]
@@ -172,7 +172,7 @@ def elimination_edge(edgeFile):
 
 
 def embedding_edge(edge_list):
-    # extract & embedding the features of each edge from input file #
+    # extract & embedding the nips_features of each edge from input file #
     edge_encode = []
     edge_embedding = []
 
@@ -214,7 +214,7 @@ def construct_vec(edge_list, node_embedding, var_embedding, edge_embedding, edge
     S_point = ['S']
     W_point = ['W0', 'W1', 'W2', 'W3', 'W4']
     C_point = ['C0', 'C1', 'C2', 'C3', 'C4']
-    main_point = ['S', 'W0', 'W1', 'W2', 'W3', 'W4', 'C0', 'C1', 'C2', 'C3', 'C4', 'F']
+    main_point = ['S', 'W0', 'W1', 'W2', 'W3', 'W4', 'C0', 'C1', 'C2', 'C3', 'C4']
     node_embedding_dim_without_edge = 250
 
     if len(var_embedding) > 0:
@@ -399,8 +399,8 @@ def construct_vec(edge_list, node_embedding, var_embedding, edge_embedding, edge
 
 
 if __name__ == "__main__":
-    node = "../../data/reentrancy/graph_data/node/cross-function-reentrancy-fixed.sol"
-    edge = "../../data/reentrancy/graph_data/edge/cross-function-reentrancy-fixed.sol"
+    node = "../../data/reentrancy/graph_data/node/cross-function-reentrancy.sol"
+    edge = "../../data/reentrancy/graph_data/edge/cross-function-reentrancy.sol"
     nodeNum, node_list, node_attribute_list = extract_node_features(node)
     node_attribute_list, extra_var_list = elimination_node(node_attribute_list)
     node_encode, var_encode, node_embedding, var_embedding = embedding_node(node_attribute_list)

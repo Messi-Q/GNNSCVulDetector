@@ -57,7 +57,7 @@ def generate_graph(filepath):
     timeStampList = []  # Store all W functions that call call.value
     otherFunctionList = []  # Store functions other than W functions
     node_list = []  # Store all the points
-    edge_list = []  # Store edge and edge features
+    edge_list = []  # Store edge and edge nips_features
     node_feature_list = []  # Store nodes feature
     timeStampFlag = 0
 

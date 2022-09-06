@@ -51,11 +51,11 @@ class GNNSCModel(DetectModel):
             'num_nodes': 100000,
             'use_edge_bias': False,  # False or True
 
-            'propagation_rounds': 1,
-            'propagation_substeps': 15,  # [15, 20]
+            'propagation_rounds': 2,
+            'propagation_substeps': 100,  # [15, 20]
 
-            'graph_rnn_cell': 'rnn',  # gru or rnn
-            'graph_rnn_activation': 'tanh',  # tanh or relu
+            'graph_rnn_cell': 'gru',  # gru or rnn
+            'graph_rnn_activation': 'relu',  # tanh or relu
             'graph_state_dropout_keep_prob': 0.9,  # [0.5, 1.0]
 
             'task_sample_ratios': {},
@@ -267,7 +267,7 @@ class GNNSCModel(DetectModel):
                                                        self.params['task_ids']]})
 
         if is_training_data:
-            # np.random.shuffle(processed_graphs)  # shuffle the data
+            # np.random.shuffle(processed_graphs)
             for task_id in self.params['task_ids']:
                 task_sample_ratio = self.params['task_sample_ratios'].get(str(task_id))
                 if task_sample_ratio is not None:

@@ -16,26 +16,26 @@ class DetectModel(object):
     @classmethod
     def default_params(cls):
         return {
-            'num_epochs': 200,
-            'patience': 150,
+            'num_epochs': 250,
+            'patience': 200,
             'learning_rate': 0.002,
             'clamp_gradient_norm': 0.9,  # [0.8, 1.0]
             'out_layer_dropout_keep_prob': 0.9,  # [0.8, 1.0]
 
-            'hidden_size': 250,  # 256/512/1024/2048
+            'hidden_size': 256,  # 256/512/1024/2048
             'use_graph': True,
 
             'tie_fwd_bkwd': False,  # True or False
             'task_ids': [0],
 
-            'train_file': 'train_data/reentrancy/train.json',
-            'valid_file': 'train_data/reentrancy/valid.json'
+            # 'train_file': 'train_data/reentrancy/train.json',
+            # 'valid_file': 'train_data/reentrancy/valid.json'
 
-            # 'train_file': 'train_data/timestamp/train.json',
-            # 'valid_file': 'train_data/timestamp/valid.json'
+            'train_file': 'train_data/timestamp/train.json',
+            'valid_file': 'train_data/timestamp/valid.json'
 
-            # 'train_file': 'train_data/loops/train.json',
-            # 'valid_file': 'train_data/loops/valid.json'
+            # 'train_file': 'nips_data/integeroverflow/train.json',
+            # 'valid_file': 'nips_data/integeroverflow/valid.json'
         }
 
     def __init__(self, args):
@@ -49,10 +49,10 @@ class DetectModel(object):
 
         # random_seed = None
         random_seed = args.get('--random_seed')
-        self.random_seed = int(random_seed)
+        self.random_seed = int(9903)   # optional
 
         threshold = args.get('--thresholds')
-        self.threshold = float(threshold)
+        self.threshold = float(0.45)   # optional
 
         self.run_id = "_".join([time.strftime("%Y-%m-%d-%H-%M-%S"), str(os.getpid())])
         log_dir = args.get('--log_dir') or '.'
@@ -285,24 +285,24 @@ class DetectModel(object):
                 feed_dict=batch_data)
 
             # output the feature vectors (QP)
-            if epoch == 150 and is_training is True:
+            if epoch == 10 and is_training is True:
                 var_fn = self.sess.run([self.ops['sigm_val']], feed_dict=batch_data)
 
                 ss = tf.unsorted_segment_sum(data=self.ops['final_node_representations'],
                                              segment_ids=self.placeholders['graph_nodes_list'],
                                              num_segments=self.placeholders['num_graphs'])
                 var_finial_node = self.sess.run([ss], feed_dict=batch_data)
-                np.savetxt("./features/reentrancy/reentrancy_train_feature_with_rnn_cell.txt", var_finial_node[0],
+                np.savetxt("./nips_features/reentrancy/reentrancy_train_feature.txt", var_finial_node[0],
                            fmt="%.6f")
                 # print("graph representation: {}".format(var_fn))
                 print("type: {}  length: {}".format(type(var_fn), len(var_fn)))
-            elif epoch == 150 and is_training is not True:
+            elif epoch == 10 and is_training is not True:
                 var_fn = self.sess.run([self.ops['sigm_val']], feed_dict=batch_data)
                 ss = tf.unsorted_segment_sum(data=self.ops['final_node_representations'],
                                              segment_ids=self.placeholders['graph_nodes_list'],
                                              num_segments=self.placeholders['num_graphs'])
                 var_finial_node = self.sess.run([ss], feed_dict=batch_data)
-                np.savetxt("./features/reentrancy/reentrancy_valid_feature_with_rnn_cell.txt", var_finial_node[0],
+                np.savetxt("./nips_features/reentrancy/reentrancy_valid_feature.txt", var_finial_node[0],
                            delimiter=", ",
                            fmt="%.6f")
                 # print("graph representation: {}".format(var_fn))

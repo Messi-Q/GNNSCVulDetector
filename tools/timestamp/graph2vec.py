@@ -24,7 +24,7 @@ node_convert = {"S0": 0, "W0": 1, "VAR0": 2}
 v2o = vec2onehot()  # create the one-bot dicts
 
 
-# extract the features of each node from input file #
+# extract the nips_features of each node from input file #
 def extract_node_features(nodeFile):
     nodeNum = 0
     node_list = []
@@ -127,7 +127,7 @@ def elimination_edge(edgeFile):
 
 
 def embedding_edge(edge_list):
-    # extract & embedding the features of each edge from input file #
+    # extract & embedding the nips_features of each edge from input file #
     edge_encode = []
     edge_embedding = []
 
