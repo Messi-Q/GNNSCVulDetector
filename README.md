@@ -7,16 +7,13 @@ In this research work, we focus on detecting three types of smart contract vulne
 ## Citation
 Please use this citation if you want to cite our [paper](https://www.ijcai.org/Proceedings/2020/0454.pdf) or codebase in your paper:
 ```
-@inproceedings{ijcai2020-454,
-  title     = {Smart Contract Vulnerability Detection using Graph Neural Network},
-  author    = {Zhuang, Yuan and Liu, Zhenguang and Qian, Peng and Liu, Qi and Wang, Xiang and He, Qinming},
-  booktitle = {Proceedings of the Twenty-Ninth International Joint Conference on
-               Artificial Intelligence, {IJCAI-20}},
-  publisher = {International Joint Conferences on Artificial Intelligence Organization}, 
-  pages     = {3283--3290},
-  year      = {2020},
+@inproceedings{zhuang2020smart,
+  title={Smart Contract Vulnerability Detection using Graph Neural Network.},
+  author={Zhuang, Yuan and Liu, Zhenguang and Qian, Peng and Liu, Qi and Wang, Xiang and He, Qinming},
+  booktitle={IJCAI},
+  pages={3283--3290},
+  year={2020}
 }
-
 ``` 
 
 
@@ -127,10 +124,9 @@ Examples:
 python GNNSCModel.py --random_seed 9930 --thresholds 0.45
 ```
 
-### Consultation
+### Note
 We would like to point that the data processing code is available here. 
 If any question, please email to messi.qp711@gmail.com. And, the code is adapted from [GGNN](https://github.com/Microsoft/gated-graph-neural-network-samples).
-Technical questions can be addressed to messi.qp711@gmail.com, zhuangyuan2020@outlook.com, liuzhenguang2008@gmail.com.
 
 
 
