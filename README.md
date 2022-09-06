@@ -53,9 +53,6 @@ All of the smart contract source code, graph data, and training data in these fo
 ```shell
 ${GNNSCVulDetector}
 ├── data
-│   ├── loops
-│   │   └── source_code
-│   │   └── graph_data
 │   ├── timestamp
 │   │   └── source_code
 │   │   └── graph_data
@@ -63,13 +60,9 @@ ${GNNSCVulDetector}
 │       └── source_code
 │       └── graph_data
 ├── features
-    ├── loops
     ├── timestamp
     └── reentrancy
 ├── train_data
-    ├── loops
-    │   └── train.json
-    │   └── vaild.json
     ├── timestamp
     │   └── train.json
     │   └── vaild.json
