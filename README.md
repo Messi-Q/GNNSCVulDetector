@@ -1,7 +1,7 @@
 # GNNSCVulDetector ![GitHub stars](https://img.shields.io/github/stars/Messi-Q/GNNSCVulDetector.svg?style=plastic) ![GitHub forks](https://img.shields.io/github/forks/Messi-Q/GNNSCVulDetector.svg?color=blue&style=plastic) 
 
 This repo is a python implementation of smart contract vulnerability detection using graph neural networks. 
-In this research work, we focus on detecting three types of smart contract vulnerabilities (i.e., reentrancy, timestamp dependence, and infinite loop).
+In this research work, we focus on detecting three types of smart contract vulnerabilities (i.e., reentrancy and timestamp dependence).
 
 
 ## Citation
@@ -53,23 +53,13 @@ All of the smart contract source code, graph data, and training data in these fo
 ```shell
 ${GNNSCVulDetector}
 ├── data
-│   ├── loops
-│   │   └── source_code
-│   │   └── graph_data
 │   ├── timestamp
 │   │   └── source_code
 │   │   └── graph_data
 │   └── reentrancy
 │       └── source_code
 │       └── graph_data
-├── features
-    ├── loops
-    ├── timestamp
-    └── reentrancy
 ├── train_data
-    ├── loops
-    │   └── train.json
-    │   └── vaild.json
     ├── timestamp
     │   └── train.json
     │   └── vaild.json
