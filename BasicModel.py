@@ -28,11 +28,11 @@ class DetectModel(object):
             'tie_fwd_bkwd': False,  # True or False
             'task_ids': [0],
 
-            # 'train_file': 'train_data/reentrancy/train.json',
-            # 'valid_file': 'train_data/reentrancy/valid.json'
+            'train_file': 'train_data/reentrancy/train.json',
+            'valid_file': 'train_data/reentrancy/valid.json'
 
-            'train_file': 'train_data/timestamp/train.json',
-            'valid_file': 'train_data/timestamp/valid.json'
+            # 'train_file': 'train_data/timestamp/train.json',
+            # 'valid_file': 'train_data/timestamp/valid.json'
 
             # 'train_file': 'nips_data/integeroverflow/train.json',
             # 'valid_file': 'nips_data/integeroverflow/valid.json'
@@ -285,24 +285,24 @@ class DetectModel(object):
                 feed_dict=batch_data)
 
             # output the feature vectors (QP)
-            if epoch == 10 and is_training is True:
+            if epoch == 150 and is_training is True:
                 var_fn = self.sess.run([self.ops['sigm_val']], feed_dict=batch_data)
 
                 ss = tf.unsorted_segment_sum(data=self.ops['final_node_representations'],
                                              segment_ids=self.placeholders['graph_nodes_list'],
                                              num_segments=self.placeholders['num_graphs'])
                 var_finial_node = self.sess.run([ss], feed_dict=batch_data)
-                np.savetxt("./nips_features/reentrancy/reentrancy_train_feature.txt", var_finial_node[0],
+                np.savetxt("./features/timestamp/timestamp_train_feature.txt", var_finial_node[0],
                            fmt="%.6f")
                 # print("graph representation: {}".format(var_fn))
                 print("type: {}  length: {}".format(type(var_fn), len(var_fn)))
-            elif epoch == 10 and is_training is not True:
+            elif epoch == 150 and is_training is not True:
                 var_fn = self.sess.run([self.ops['sigm_val']], feed_dict=batch_data)
                 ss = tf.unsorted_segment_sum(data=self.ops['final_node_representations'],
                                              segment_ids=self.placeholders['graph_nodes_list'],
                                              num_segments=self.placeholders['num_graphs'])
                 var_finial_node = self.sess.run([ss], feed_dict=batch_data)
-                np.savetxt("./nips_features/reentrancy/reentrancy_valid_feature.txt", var_finial_node[0],
+                np.savetxt("./features/timestamp/timestamp_valid_feature.txt", var_finial_node[0],
                            delimiter=", ",
                            fmt="%.6f")
                 # print("graph representation: {}".format(var_fn))
