@@ -1,11 +1,10 @@
 # GNNSCVulDetector ![GitHub stars](https://img.shields.io/github/stars/Messi-Q/GNNSCVulDetector.svg?style=plastic) ![GitHub forks](https://img.shields.io/github/forks/Messi-Q/GNNSCVulDetector.svg?color=blue&style=plastic) 
 
-This repo is a python implementation of smart contract vulnerability detection using graph neural networks. 
-In this research work, we focus on detecting three types of smart contract vulnerabilities (i.e., reentrancy and timestamp dependence).
+This repo is a python implementation of smart contract vulnerability detection using graph neural networks (TMP).
 
 
 ## Citation
-Please use this citation if you want to cite our [paper](https://www.ijcai.org/Proceedings/2020/0454.pdf) or codebase in your paper:
+Please use this citation in your paper if you refer to our [paper](https://www.ijcai.org/Proceedings/2020/0454.pdf) or code.
 ```
 @inproceedings{zhuang2020smart,
   title={Smart Contract Vulnerability Detection using Graph Neural Network.},
@@ -20,10 +19,10 @@ Please use this citation if you want to cite our [paper](https://www.ijcai.org/P
 ## Requirements
 
 #### Required Packages
-* **python**3
-* **TensorFlow**1.14.0 (tf2.0 is not supported)
-* **keras**2.2.4 with TensorFlow backend
-* **sklearn** for model evaluation
+* **python** 3+
+* **TensorFlow** 1.14.0 (tf2.0 is not supported)
+* **keras** 2.2.4 with TensorFlow backend
+* **sklearn** 0.20.2
 * **docopt** as a command-line interface parser 
 
 Run the following script to install the required packages.
@@ -31,7 +30,7 @@ Run the following script to install the required packages.
 pip install --upgrade pip
 pip install tensorflow==1.14.0
 pip install keras==2.2.4
-pip install scikit-learn
+pip install scikit-learn==0.20.2
 pip install docopt
 ```
 
@@ -95,23 +94,23 @@ ${GNNSCVulDetector}
 * Find the relationships between functions.
 * Extract all smart contracts source code into the corresponding contract graph consisting of nodes and edges.
 ```shell
-python AutoExtractGraph.py
+python3 AutoExtractGraph.py
 ```
 
 `graph2vec.py`
 * Feature ablation.
 * Convert contract graph into vectors.
 ```shell
-python graph2vec.py
+python3 graph2vec.py
 ```
 
 
 ## Running project
-* To run the program, use this command: python GNNSCModel.py.
+* To run the program, use this command: python3 GNNSCModel.py.
 
 Examples:
 ```shell
-python GNNSCModel.py --random_seed 9930 --thresholds 0.45
+python3 GNNSCModel.py --random_seed 9930 --thresholds 0.45
 ```
 
 ### Note

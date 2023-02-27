@@ -52,7 +52,7 @@ class GNNSCModel(DetectModel):
             'use_edge_bias': False,  # False or True
 
             'propagation_rounds': 2,
-            'propagation_substeps': 100,  # [15, 20]
+            'propagation_substeps': 20,  # [15, 20]
 
             'graph_rnn_cell': 'gru',  # gru or rnn
             'graph_rnn_activation': 'relu',  # tanh or relu

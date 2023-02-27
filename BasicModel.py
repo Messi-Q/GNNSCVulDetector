@@ -28,11 +28,11 @@ class DetectModel(object):
             'tie_fwd_bkwd': False,  # True or False
             'task_ids': [0],
 
-            # 'train_file': 'train_data/reentrancy/train.json',
-            # 'valid_file': 'train_data/reentrancy/valid.json'
+            'train_file': 'train_data/reentrancy/train.json',
+            'valid_file': 'train_data/reentrancy/valid.json'
 
-            'train_file': 'train_data/timestamp/train.json',
-            'valid_file': 'train_data/timestamp/valid.json'
+            # 'train_file': 'train_data/timestamp/train.json',
+            # 'valid_file': 'train_data/timestamp/valid.json'
 
             # 'train_file': 'nips_data/integeroverflow/train.json',
             # 'valid_file': 'nips_data/integeroverflow/valid.json'
