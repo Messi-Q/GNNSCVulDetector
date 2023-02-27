@@ -39,13 +39,11 @@ For each dataset, we randomly pick 80% contracts as the training set while the r
 In the comparison, metrics accuracy, recall, precision, and F1 score are all involved. In consideration of the distinct features of different platforms, 
 experiments for reentrancy and timestamp dependence vulnerability are conducted on ESC (Ethereum smart contract) dataset, while infinite loop vulnerability is evaluated on VSC (Vntchain smart contract) dataset.
 
-#### Smart contract source code
-[Ethereum smart contract](https://drive.google.com/open?id=1h9aFFSsL7mK4NmVJd4So7IJlFj9u0HRv)
-
-[Vntchain smart contract](https://drive.google.com/open?id=1FTb__ERCOGNGM9dTeHLwAxBLw7X5Td4v)
-
 Here, we provide a [tool](https://github.com/Messi-Q/Crawler) for crawling the smart contract source code from Etherscan, which is developed in Aug 2018. 
-If out of date, you can refer and make the corresponding improvements.
+If out of date, you can make the corresponding improvements.
+
+For original dataset, please turn to the dataset [repo](https://github.com/Messi-Q/Smart-Contract-Dataset).
+
 
 #### Dataset structure in this project
 All of the smart contract source code, graph data, and training data in these folders in the following structure respectively.
