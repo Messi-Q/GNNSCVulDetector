@@ -77,7 +77,7 @@ ${GNNSCVulDetector}
 
 
 ### Code Files
-The tools and models are as follows:
+The tools for extracting graph features (vectors) are as follows:
 ```shell
 ${GNNSCVulDetector}
 ├── tools
@@ -104,7 +104,7 @@ python3 graph2vec.py
 
 
 ## Running project
-* To run the program, use this command: python3 GNNSCModel.py.
+* To run the program, please use this command: python3 GNNSCModel.py.
 
 Examples:
 ```shell
